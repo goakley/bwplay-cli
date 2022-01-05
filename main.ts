@@ -5,12 +5,11 @@ import * as http from 'http';
 import * as path from 'path';
 import * as yargs from 'yargs';
 import * as glob from 'glob';
-import { resolve } from 'path/posix';
-import { url } from 'inspector';
-import { FileWatcherEventKind } from 'typescript';
 
 // The icons to generate
 const ICON_SIZES: [number, number[]][] = [[64, [32, 48, 64]], [128, [72, 96, 128]], [192, [144, 168, 192]], [256, [256]], [512, [512]]];
+
+const DEFAULT_ICON_BASE64 = 'iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU/TSlUqDi0i4pChOlkQFXHUKhShQqgVWnUweekfNGlIUlwcBdeCgz+LVQcXZ10dXAVB8AfE0clJ0UVKvK8ptIjxwuN9nHfP4b37AKFeZpoVGAc03TZTibiYya6KwVf40IMwAhiQmWXMSVISnvV1T91UdzGe5d33Z/WpOYsBPpF4lhmmTbxBPL1pG5z3iSOsKKvE58RjJl2Q+JHristvnAtNFnhmxEyn5okjxGKhg5UOZkVTI54ijqqaTvlCxmWV8xZnrVxlrXvyF4Zy+soy12kNI4FFLEGCCAVVlFCGjRjtOikWUnQe9/APNf0SuRRylcDIsYAKNMhNP/gf/J6tlZ+ccJNCcaDrxXE+RoDgLtCoOc73seM0TgD/M3Clt/2VOjDzSXqtrUWPgP5t4OK6rSl7wOUOMPhkyKbclPy0hHweeD+jb8oC4Vugd82dW+scpw9AmmaVvAEODoHRAmWve7y7u3Nu//a05vcD+ItydtB1d8wAAAAJcEhZcwAALiMAAC4jAXilP3YAAAAHdElNRQfmAQkTByAm7p8jAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAC5JREFUCNdjYMAD/v//////f+wSyNIQkgkux8jIiKwaKsHIyIhmGroOApbhcyoABB8j7ARV/woAAAAASUVORK5CYII=';
 
 type ScreenOrientation = 'any' | 'portrait' | 'landscape';
 
@@ -44,6 +43,14 @@ type ProjectConfig = {
     androidVersionCode?: number,
     androidVersionName?: string,
     androidNetworkSecurityDomains?: string[],
+};
+
+const DEFAULT_PROJECT_CONFIG: ProjectConfig = {
+    name: "My Project",
+    javascriptFiles: ["main.js"],
+    iconFile: 'icon.png',
+    screenOrientation: 'landscape',
+    androidPackageName: 'com.example.my_project',
 };
 
 async function loadProjectConfig(): Promise<ProjectConfig> {
@@ -346,7 +353,7 @@ ${srcs.join('\n')}
     });
 }
 
-async function buildAndroid(output: string, name: string, packageName: string, iconFile: string, javascripts: string[], orientation: ScreenOrientation, versionCode: number, versionName: string, networkSecurityDomains: string[]): Promise<void> {
+async function exportAndroid(output: string, name: string, packageName: string, iconFile: string, javascripts: string[], orientation: ScreenOrientation, versionCode: number, versionName: string, networkSecurityDomains: string[]): Promise<void> {
     const sizes: [string, number][] = [['mdpi', 48], ['hdpi', 72], ['xhdpi', 96], ['xxhdpi', 144], ['xxxhdpi', 192]];
     // TODO: make this flexible
     const themeColor = "#666666";
@@ -376,7 +383,7 @@ async function buildAndroid(output: string, name: string, packageName: string, i
     await Promise.all(files.map(([filename, content]) => fs.mkdir(path.dirname(`${output}/${filename}`), { recursive: true }).then(_ => fs.writeFile(`${output}/${filename}`, content))));
 }
 
-async function buildWeb(output: string, name: string, iconFile: string, javascripts: string[], orientation: ScreenOrientation): Promise<void> {
+async function exportWeb(output: string, name: string, iconFile: string, javascripts: string[], orientation: ScreenOrientation): Promise<void> {
     // TODO: make this flexible
     const themeColor = "#666666";
     let manifest = {
@@ -465,20 +472,37 @@ async function serve(name: string): Promise<void> {
 }
 
 yargs.command(
-    'build',
-    'build',
+    'new',
+    'Generate a new bwplay.json config file',
+    (yargs) => { },
+    (argv) => {
+        fs.access('bwplay.json').then(_ => {
+            console.log('The file `bwplay.json` already exists in this directory.');
+            console.log('If you want to generate a new config file, please remove the old one first.');
+        }).catch(_ => {
+            fs.writeFile('bwplay.json', JSON.stringify(DEFAULT_PROJECT_CONFIG, undefined, 2));
+        });
+        fs.access('icon.png').then(_ => {
+            console.log('The file `icon.png` already exists and will not be overwritten.');
+        }).catch(_ => {
+            fs.writeFile('icon.png', Buffer.from(DEFAULT_ICON_BASE64, 'base64'));
+        });
+    }
+).command(
+    'export',
+    'Export a project to different targets',
     (yargs) => { },
     (argv) => loadProjectConfig().then(config => {
-        let promises = [buildWeb(
-            'build/web',
+        let promises = [exportWeb(
+            'export/web',
             config.name,
             config.iconFile,
             config.javascriptFiles,
             config.screenOrientation,
         )];
         if (config.androidPackageName !== undefined) {
-            promises.push(buildAndroid(
-                'build/android',
+            promises.push(exportAndroid(
+                'export/android',
                 config.name,
                 config.androidPackageName,
                 config.iconFile,

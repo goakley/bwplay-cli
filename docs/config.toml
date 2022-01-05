@@ -1,0 +1,4 @@
+baseURL = 'https://goakley.github.io/bwplay-cli/'
+languageCode = 'en-us'
+title = 'bwplay-cli'
+theme = 'hugo-book'

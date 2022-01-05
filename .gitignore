@@ -1,1 +1,7 @@
+# node stuff
 node_modules
+
+# hugo stuff
+.hugo_build.lock
+docs/public
+docs/resources
