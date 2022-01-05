@@ -1,0 +1,41 @@
+{
+  "name": "bwplay-cli",
+  "author": "Glen Oakley",
+  "homepage": "https://goakley.github.io/bwplay-cli",
+  "version": "1.0.0",
+  "description": "Tools for creating simple browser games",
+  "keywords": [
+    "tools",
+    "game-development",
+    "progressive-web-app",
+    "android",
+    "TypeScript"
+  ],
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/goakley/bwplay-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goakley/bwplay-cli.git"
+  },
+  "main": "./main.js",
+  "types": "./main.d.ts",
+  "bin": {
+    "bwplay-cli": "./bin/bwplay-cli"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "main": "node main.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/node": "^17.0.6",
+    "@types/yargs": "^17.0.8",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "glob": "^7.2.0",
+    "yargs": "^17.3.1"
+  }
+}
