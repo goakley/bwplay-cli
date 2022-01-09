@@ -381,6 +381,7 @@ async function exportAndroid(output: string, name: string, packageName: string, 
     ];
     await Promise.all(sizes.map(([name, size]) => imagemagickResize(iconFile, `${output}/app/src/main/res/mipmap-${name}/ic_launcher.png`, size)));
     await Promise.all(files.map(([filename, content]) => fs.mkdir(path.dirname(`${output}/${filename}`), { recursive: true }).then(_ => fs.writeFile(`${output}/${filename}`, content))));
+    console.log(`Android export successful - files are in: ${output}`)
 }
 
 async function exportWeb(output: string, name: string, iconFile: string, javascripts: string[], orientation: ScreenOrientation): Promise<void> {
@@ -409,6 +410,7 @@ async function exportWeb(output: string, name: string, iconFile: string, javascr
         const manifestString = JSON.stringify(manifest, null, 4);
         fs.writeFile(`${output}/manifest.json`, manifestString).then(_ => fs.writeFile(`${output}/index.html`, html));
     });
+    console.log(`Web export successful - files are in: ${output}`)
 }
 
 async function spawnJavascriptWatcher(): Promise<() => string[]> {
@@ -440,11 +442,14 @@ async function spawnAudioWatcher(): Promise<() => string[]> {
     return () => lastAudioFiles || [];
 }
 
-async function serve(name: string): Promise<void> {
+async function serve(name: string, port: number): Promise<void> {
     // TODO: make this flexible
     const themeColor = "#666666";
+    console.log("Spawning JavaScript watcher...");
     const getJavascriptFiles = await spawnJavascriptWatcher();
+    console.log("Spawning audio watcher...");
     const getAudioFiles = await spawnAudioWatcher();
+    console.log("Starting HTTP server...")
     const html = await generateFileHTML(name, themeColor, getJavascriptFiles(), false);
     http.createServer((req, res) => {
         const url = new URL(req.url || '/', `http://${req.headers.host}`);
@@ -468,7 +473,9 @@ async function serve(name: string): Promise<void> {
             res.writeHead(err.code === 'ENOENT' ? 404 : 500);
             res.end(err.code === 'ENOENT' ? 'Not Found (file does not exist)' : JSON.stringify(err));
         });
-    }).listen(8080);
+    }).listen(port, undefined, undefined, () => {
+        console.log(`Server is ready: http://localhost:${port}/`);
+    });
 }
 
 yargs.command(
@@ -512,12 +519,14 @@ yargs.command(
                 config.androidVersionName || "0.1",
                 config.androidNetworkSecurityDomains || [],
             ));
+        } else {
+            console.log("Skipping the Android export: No `androidPackageName` defined");
         }
         Promise.all(promises);
     }),
 ).command(
     'generate-audio',
-    'generate audio',
+    'Generate the `Audio` TypeScript code',
     (yargs) => yargs.options({
         unpacked: {
             describe: 'do not pack the audio into the code as data urls',
@@ -535,9 +544,15 @@ yargs.command(
     }),
 ).command(
     'serve',
-    'serve',
-    (yargs) => { },
+    'Run the development server',
+    (yargs) => yargs.options({
+        port: {
+            describe: 'the port on which to serve files',
+            type: 'number',
+            default: 8000,
+        }
+    }),
     (argv) => loadProjectConfig().then(config => {
-        serve(config.name);
+        serve(config.name, argv.port);
     }),
 ).demandCommand().strict().argv;
