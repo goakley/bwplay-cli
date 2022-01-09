@@ -27,3 +27,7 @@ npm exec -- bwplay-cli serve
 ```
 
 See [the documentation's getting started guide](https://goakley.github.io/bwplay-cli/docs/getting-started) for a more practical introduction to the tooling.
+
+## Projects Using `bwplay-cli`
+
+* **[Cross-Count](https://goakley.itch.io/cross-count)** - a minimalistic numbers puzzler
