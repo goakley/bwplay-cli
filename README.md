@@ -1,5 +1,8 @@
 # bwplay-cli
 
+[![npm version](https://badge.fury.io/js/typescript.svg)](https://www.npmjs.com/package/typescript)
+[![github pages workflow](https://github.com/goakley/bwplay-cli/workflows/github%20pages/badge.svg)
+
 `bwplay-cli` is a set of tools for building javascript-based games.
 The tooling is designed to be minimal and flexible.
 
