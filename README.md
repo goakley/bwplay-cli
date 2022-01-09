@@ -1,6 +1,6 @@
 # bwplay-cli
 
-[![npm version](https://badge.fury.io/js/typescript.svg)](https://www.npmjs.com/package/typescript)
+[![npm version](https://badge.fury.io/js/bwplay-cli.svg)](https://www.npmjs.com/package/bwplay-cli)
 [![license](https://img.shields.io/github/license/goakley/bwplay-cli)](https://github.com/goakley/bwplay-cli/blob/master/LICENSE.txt)
 [![github pages workflow](https://github.com/goakley/bwplay-cli/workflows/github%20pages/badge.svg)](https://github.com/goakley/bwplay-cli/actions?query=github%20pages)
 
