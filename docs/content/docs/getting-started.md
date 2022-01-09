@@ -5,7 +5,7 @@ weight: 10
 
 # Getting Started
 
-You can quickly start working with `bwplay-cli` by installing the package from [npm](https://www.npmjs.com/) and creating a sample project config:
+You can quickly start working with `bwplay-cli` by installing the package from [npm](https://www.npmjs.com/package/bwplay-cli) and creating a sample project config:
 
 ```bash
 npm i bwplay-cli
