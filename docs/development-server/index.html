@@ -1,0 +1,107 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Development Server #  bwplay-cli has a built-in development server, with the goal of making it easier to iterate on your project.
+bwplay-cli serve This server takes care of a number of tasks on your behalf, including:
+ Providing an HTML file at the root of the server that loads your project&rsquo;s JavaScript Limiting itself to only serving files that are part of your project Live re-generation of asset code  The HTML file at the root of the server is minimal - it has a body with no padding or margins that contains only <script> tags (which reference all the JavaScript files configured in the project settings).">
+<meta name=theme-color content="#FFFFFF">
+<meta name=color-scheme content="light dark"><meta property="og:title" content="Development Server">
+<meta property="og:description" content="Development Server #  bwplay-cli has a built-in development server, with the goal of making it easier to iterate on your project.
+bwplay-cli serve This server takes care of a number of tasks on your behalf, including:
+ Providing an HTML file at the root of the server that loads your project&rsquo;s JavaScript Limiting itself to only serving files that are part of your project Live re-generation of asset code  The HTML file at the root of the server is minimal - it has a body with no padding or margins that contains only <script> tags (which reference all the JavaScript files configured in the project settings).">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://goakley.github.io/bwplay-cli/docs/development-server/"><meta property="article:section" content="docs">
+<title>Development Server | bwplay-cli</title>
+<link rel=manifest href=/bwplay-cli/manifest.json>
+<link rel=icon href=/bwplay-cli/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/bwplay-cli/book.min.46181bc93375ba932026e753b37c40e6ff8bb16a9ef770c78bcc663e4577b1ba.css integrity="sha256-RhgbyTN1upMgJudTs3xA5v+LsWqe93DHi8xmPkV3sbo=" crossorigin=anonymous>
+<script defer src=/bwplay-cli/flexsearch.min.js></script>
+<script defer src=/bwplay-cli/en.search.min.e675bf9f26c0dc70dbe96877c929923a3b6b6560476adfff995c1889a1717fd9.js integrity="sha256-5nW/nybA3HDb6Wh3ySmSOjtrZWBHat//mVwYiaFxf9k=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a class="flex align-center" href=/bwplay-cli/><span>bwplay-cli</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/getting-started/>Getting Started</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/configuration/>Configuration</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/code-generator/>Code Generator</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/development-server/ class=active>Development Server</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/exporting/>Exporting</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/bwplay-cli/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Development Server</strong>
+<label for=toc-control>
+<img src=/bwplay-cli/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents></nav>
+</aside>
+</header>
+<article class=markdown><h1 id=development-server>
+Development Server
+<a class=anchor href=#development-server>#</a>
+</h1>
+<p><code>bwplay-cli</code> has a built-in development server, with the goal of making it easier to iterate on your project.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>bwplay-cli serve
+</code></pre></div><p>This server takes care of a number of tasks on your behalf, including:</p>
+<ul>
+<li>Providing an HTML file at the root of the server that loads your project&rsquo;s JavaScript</li>
+<li>Limiting itself to only serving files that are part of your project</li>
+<li>Live re-generation of <a href=/bwplay-cli/docs/code-generator/>asset code</a></li>
+</ul>
+<p>The HTML file at the root of the server is minimal - it has a body with no padding or margins that contains only <code>&lt;script></code> tags (which reference all the JavaScript files <a href=/bwplay-cli/docs/configuration/#javascriptfiles>configured in the project settings</a>).
+This HTML file is similar to the one used when <a href=/bwplay-cli/docs/exporting/>exporting your project</a>, so if your project works on the development server&rsquo;s web page, it should work in the exports' too.</p>
+<p>Files that are not referenced in the project settings (JavaScript, assets, etc) are not served by the development server.
+This is on purpose - unreferenced files will not be part of an export, and if you were to accidentally forget to include certain files, it would be best to catch that as soon as possible while developing.</p>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents></nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

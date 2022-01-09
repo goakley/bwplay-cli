@@ -1,0 +1,169 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Exporting #  bwplay-cli allows you to export your project to different platforms. This makes it easy to distribute your game to other (non-technical) people.
+bwplay-cli export There is no cross-compilation - different targets will runs your JavaScript as-is, just in different contexts. Your code in the exports is the same as it was in your project.
+Before Exporting #  The export process will include the assets and JavaScript specified in your project settings.">
+<meta name=theme-color content="#FFFFFF">
+<meta name=color-scheme content="light dark"><meta property="og:title" content="Exporting">
+<meta property="og:description" content="Exporting #  bwplay-cli allows you to export your project to different platforms. This makes it easy to distribute your game to other (non-technical) people.
+bwplay-cli export There is no cross-compilation - different targets will runs your JavaScript as-is, just in different contexts. Your code in the exports is the same as it was in your project.
+Before Exporting #  The export process will include the assets and JavaScript specified in your project settings.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://goakley.github.io/bwplay-cli/docs/exporting/"><meta property="article:section" content="docs">
+<title>Exporting | bwplay-cli</title>
+<link rel=manifest href=/bwplay-cli/manifest.json>
+<link rel=icon href=/bwplay-cli/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/bwplay-cli/book.min.46181bc93375ba932026e753b37c40e6ff8bb16a9ef770c78bcc663e4577b1ba.css integrity="sha256-RhgbyTN1upMgJudTs3xA5v+LsWqe93DHi8xmPkV3sbo=" crossorigin=anonymous>
+<script defer src=/bwplay-cli/flexsearch.min.js></script>
+<script defer src=/bwplay-cli/en.search.min.e675bf9f26c0dc70dbe96877c929923a3b6b6560476adfff995c1889a1717fd9.js integrity="sha256-5nW/nybA3HDb6Wh3ySmSOjtrZWBHat//mVwYiaFxf9k=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a class="flex align-center" href=/bwplay-cli/><span>bwplay-cli</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/getting-started/>Getting Started</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/configuration/>Configuration</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/code-generator/>Code Generator</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/development-server/>Development Server</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/exporting/ class=active>Exporting</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/bwplay-cli/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Exporting</strong>
+<label for=toc-control>
+<img src=/bwplay-cli/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#before-exporting>Before Exporting</a></li>
+<li><a href=#export-environment>Export Environment</a></li>
+<li><a href=#types-of-exports>Types of Exports</a>
+<ul>
+<li><a href=#web-pwa>Web (PWA)</a></li>
+<li><a href=#android>Android</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=exporting>
+Exporting
+<a class=anchor href=#exporting>#</a>
+</h1>
+<p><code>bwplay-cli</code> allows you to export your project to different platforms.
+This makes it easy to distribute your game to other (non-technical) people.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>bwplay-cli export
+</code></pre></div><p>There is no cross-compilation - different targets will runs your JavaScript as-is, just in different contexts.
+Your code in the exports is the same as it was in your project.</p>
+<h2 id=before-exporting>
+Before Exporting
+<a class=anchor href=#before-exporting>#</a>
+</h2>
+<p>The export process will include the assets and JavaScript specified in your <a href=/bwplay-cli/docs/configuration/>project settings</a>.
+It is up to you to convert your TypeScript into JavaScript, bundle your code together, minify your code, etc.
+The export process performs no modifications to your JavaScript code.</p>
+<p>A very simple build-and-export process may look something like:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># compile your TypeScript</span>
+tsc main.ts
+<span style=color:#75715e># minify the resulting JavaScript</span>
+babel-minify main.js
+<span style=color:#75715e># export the project</span>
+bwplay-cli export
+</code></pre></div><h2 id=export-environment>
+Export Environment
+<a class=anchor href=#export-environment>#</a>
+</h2>
+<p>The export process creates its own <code>index.html</code> file that contains all of your project&rsquo;s JavaScript in-line.
+The <code>index.html</code> has a body with no padding or margins that contains only <code>&lt;script></code> tags containing your JavaScript.
+This HTML file is similar to the one used by the <a href=/bwplay-cli/docs/development-server/>development server</a>.</p>
+<h2 id=types-of-exports>
+Types of Exports
+<a class=anchor href=#types-of-exports>#</a>
+</h2>
+<p>Exports are located in the <code>export/</code> directory in the root of your project.
+Each type of export will be in its own subdirectory (e.g. <code>export/web/</code>).</p>
+<h3 id=web-pwa>
+Web (PWA)
+<a class=anchor href=#web-pwa>#</a>
+</h3>
+<p>Exporting will always create a <a href=https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps>Progressive Web App</a> - an HTML file along with a <a href=https://developer.mozilla.org/en-US/docs/Web/Manifest>web app manifest</a> and some metadata.
+Outputting the project with this structure makes it easy to distribute your game as a simple website that can be &ldquo;installed&rdquo; on a mobile device.</p>
+<p>Since all of your JavaScript is inlined into the <code>index.html</code>, you could even distribute your game as a single <code>.html</code> file.
+However, this is not recommended if you&rsquo;re serving your game over a network, as it limits how users can interact with your game.</p>
+<h3 id=android>
+Android
+<a class=anchor href=#android>#</a>
+</h3>
+<p>If the <a href=/bwplay-cli/docs/configuration/#androidapplicationid><code>androidApplicationId</code></a> setting is specified, exporting will generate an Android <a href=https://developer.android.com/studio/projects#ApplicationModules>app module</a>.</p>
+<p>A module is only part of the file structure necessary to build a complete Android app - to use the exported module, place it inside a new or existing Android Studio project.</p>
+<blockquote class="book-hint info">
+<p><strong>Why export a module and not a project?</strong></p>
+<p>Due to differences between development environments (SDK versions, installation paths, etc), <code>bwplay-cli</code> does not know enough about your specific setup to generate an entire Android Studio project.</p>
+</blockquote>
+<p>Under the hood, the Android module renders the generated <code>index.html</code> file in an Android WebView.
+By using this strategy, the Android module stays simple while still supporting browser JavaScript features (<code>localStorage</code>, <code>fetch</code>, etc).</p>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#before-exporting>Before Exporting</a></li>
+<li><a href=#export-environment>Export Environment</a></li>
+<li><a href=#types-of-exports>Types of Exports</a>
+<ul>
+<li><a href=#web-pwa>Web (PWA)</a></li>
+<li><a href=#android>Android</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Configuration #  bwplay-cli needs some light configuration in order to understand the structure of your project.
+Assumptions #  bwplay-cli makes some assumptions about your project - if these do not hold true, this tooling may not work for you.
+Your code takes care of building its own DOM. All generated HTML assumes that your JavaScript is okay with a blank HTML document (i.e. an empty <body> element). The most common situation is that the entire document is just be a single <canvas> object, created and inserted by the first JavaScript code that executes.">
+<meta name=theme-color content="#FFFFFF">
+<meta name=color-scheme content="light dark"><meta property="og:title" content="Configuration">
+<meta property="og:description" content="Configuration #  bwplay-cli needs some light configuration in order to understand the structure of your project.
+Assumptions #  bwplay-cli makes some assumptions about your project - if these do not hold true, this tooling may not work for you.
+Your code takes care of building its own DOM. All generated HTML assumes that your JavaScript is okay with a blank HTML document (i.e. an empty <body> element). The most common situation is that the entire document is just be a single <canvas> object, created and inserted by the first JavaScript code that executes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://goakley.github.io/bwplay-cli/docs/configuration/"><meta property="article:section" content="docs">
+<title>Configuration | bwplay-cli</title>
+<link rel=manifest href=/bwplay-cli/manifest.json>
+<link rel=icon href=/bwplay-cli/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/bwplay-cli/book.min.46181bc93375ba932026e753b37c40e6ff8bb16a9ef770c78bcc663e4577b1ba.css integrity="sha256-RhgbyTN1upMgJudTs3xA5v+LsWqe93DHi8xmPkV3sbo=" crossorigin=anonymous>
+<script defer src=/bwplay-cli/flexsearch.min.js></script>
+<script defer src=/bwplay-cli/en.search.min.e675bf9f26c0dc70dbe96877c929923a3b6b6560476adfff995c1889a1717fd9.js integrity="sha256-5nW/nybA3HDb6Wh3ySmSOjtrZWBHat//mVwYiaFxf9k=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a class="flex align-center" href=/bwplay-cli/><span>bwplay-cli</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/getting-started/>Getting Started</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/configuration/ class=active>Configuration</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/code-generator/>Code Generator</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/development-server/>Development Server</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/exporting/>Exporting</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/bwplay-cli/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Configuration</strong>
+<label for=toc-control>
+<img src=/bwplay-cli/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#assumptions>Assumptions</a></li>
+<li><a href=#configuration-file>Configuration File</a>
+<ul>
+<li><a href=#properties>Properties</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=configuration>
+Configuration
+<a class=anchor href=#configuration>#</a>
+</h1>
+<p><code>bwplay-cli</code> needs some light configuration in order to understand the structure of your project.</p>
+<h2 id=assumptions>
+Assumptions
+<a class=anchor href=#assumptions>#</a>
+</h2>
+<p><code>bwplay-cli</code> makes some assumptions about your project - if these do not hold true, this tooling may not work for you.</p>
+<p><strong>Your code takes care of building its own DOM.</strong>
+All generated HTML assumes that your JavaScript is okay with a blank HTML document (i.e. an empty <code>&lt;body></code> element).
+The most common situation is that the entire document is just be a single <code>&lt;canvas></code> object, created and inserted by the first JavaScript code that executes.</p>
+<h2 id=configuration-file>
+Configuration File
+<a class=anchor href=#configuration-file>#</a>
+</h2>
+<p>All configuration is stored in a single file named <code>bwplay.json</code>.
+This file should be located at the root of your project.
+All <code>bwplay-cli</code> commands expect a <code>bwplay.json</code> to be in the current working directory (the directory from which you run <code>bwplay-cli</code>).</p>
+<p>An example file may look something like this:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;Test Game&#34;</span>,
+  <span style=color:#f92672>&#34;javascriptFiles&#34;</span>: [<span style=color:#e6db74>&#34;src/**/*.js&#34;</span>],
+  <span style=color:#f92672>&#34;audioFiles&#34;</span>: [<span style=color:#e6db74>&#34;assets/audio/*.wav&#34;</span>, <span style=color:#e6db74>&#34;test.wav&#34;</span>],
+  <span style=color:#f92672>&#34;iconFile&#34;</span>: <span style=color:#e6db74>&#34;assets/icon.png&#34;</span>,
+  <span style=color:#f92672>&#34;screenOrientation&#34;</span>: <span style=color:#e6db74>&#34;landscape&#34;</span>,
+  <span style=color:#f92672>&#34;androidPackageName&#34;</span>: <span style=color:#e6db74>&#34;com.test.game&#34;</span>,
+  <span style=color:#f92672>&#34;androidVersionCode&#34;</span>: <span style=color:#ae81ff>10003</span>,
+  <span style=color:#f92672>&#34;androidVersionName&#34;</span>: <span style=color:#e6db74>&#34;0.3&#34;</span>
+}
+</code></pre></div><h3 id=properties>
+Properties
+<a class=anchor href=#properties>#</a>
+</h3>
+<h4 id=name-required>
+<code>name</code> <em>required</em>
+<a class=anchor href=#name-required>#</a>
+</h4>
+<p>The nice, human-readable name of the project.</p>
+<h4 id=javascriptfiles-required>
+<code>javascriptFiles</code> <em>required</em>
+<a class=anchor href=#javascriptfiles-required>#</a>
+</h4>
+<p>A list of <a href=https://www.npmjs.com/package/glob>glob</a> patterns used to identify which JavaScript files should be included in the project.
+Files that aren&rsquo;t detected by any glob pattern will not be served by the development server and will not be packed into the final game.</p>
+<blockquote class="book-hint info">
+<p><strong>What about <code>.ts</code> files?</strong></p>
+<p><code>bwplay-cli</code> does not try to insert itself into earlier stages of your build pipeline.
+TypeScript files should be rendered by your own build process, and the output files should be matched by one or more glob patterns.</p>
+</blockquote>
+<h4 id=audiofiles>
+<code>audioFiles</code>
+<a class=anchor href=#audiofiles>#</a>
+</h4>
+<p>A list of <a href=https://www.npmjs.com/package/glob>glob</a> patterns used to find audio files that should be included in the project.
+These files are used when <a href=/bwplay-cli/docs/code-generator/>generating audio code</a>, running the <a href=/bwplay-cli/docs/development-server/>development server</a>, and <a href=/bwplay-cli/docs/exporting/>exporting the final game</a>.
+Files that aren&rsquo;t detected by any glob pattern will not make their way into the game.</p>
+<p>Currently, only <a href=https://en.wikipedia.org/wiki/WAV>WAV</a> files are fully supported; use other audio formats at your own risk.</p>
+<p>If this setting is not specified, no audio code will be generated.</p>
+<h4 id=audioscriptfile>
+<code>audioScriptFile</code>
+<a class=anchor href=#audioscriptfile>#</a>
+</h4>
+<p>The path to a file which will contain generated TypeScript code for the project&rsquo;s audio.
+Note that this file is generated by <code>bwplay-cli</code> and can be overwritten at any time - do not make manual changes to this file.</p>
+<p>If this setting is not specified, generated code will be written to <code>audio.ts</code> in the top-level directory of the project.</p>
+<h4 id=iconfile>
+<code>iconFile</code>
+<a class=anchor href=#iconfile>#</a>
+</h4>
+<p>The path to an image file that will be used as the icon for the game.
+Usages of this file include as a favicon, a PWA icon, and an Android app icon.</p>
+<p>This image should ideally be at least 512x512 pixels in size; the image will be automatically scaled down (or up) to different sizes to meet the requirements of favicons, app icons, etc.</p>
+<h4 id=screenorientation>
+<code>screenOrientation</code>
+<a class=anchor href=#screenorientation>#</a>
+</h4>
+<p>One of <code>any</code>, <code>portrait</code>, or <code>landscape</code>.
+Whether the game&rsquo;s viewport should be taller than wide (portrait), wider than tall (landscape), or if the size doesn&rsquo;t matter (any).</p>
+<p>Setting this to <code>portrait</code> or <code>landscape</code> will lock the viewport to this mode.
+&ldquo;any&rdquo; is only useful if your game is able to render itself regardless of screen resolution.</p>
+<h4 id=androidapplicationid>
+<code>androidApplicationId</code>
+<a class=anchor href=#androidapplicationid>#</a>
+</h4>
+<p>The <a href=https://developer.android.com/studio/build/configure-app-module#set_the_application_id><code>applicationId</code></a> that you&rsquo;d like to use when <a href=/bwplay-cli/docs/exporting/>exporting to Android</a>.</p>
+<p>This setting is only necessary if you&rsquo;ll be exporting to Android, however you cannot export to Android without it.</p>
+<h4 id=androidversioncode>
+<code>androidVersionCode</code>
+<a class=anchor href=#androidversioncode>#</a>
+</h4>
+<p>An <a href=https://developer.android.com/studio/publish/versioning#appversioning>integer</a>, designed to grow larger each time you release a new version of the Android app.</p>
+<p>If you export to Android without setting this value, a low number will be chosen as a default.</p>
+<h4 id=androidversionname>
+<code>androidVersionName</code>
+<a class=anchor href=#androidversionname>#</a>
+</h4>
+<p>An <a href=https://developer.android.com/studio/publish/versioning#appversioning>arbitrary human-readable string</a> - it&rsquo;s only purpose is to be shown to Android users so that they can identify the version of your app.</p>
+<p>If you export to Android without setting this value, a low <code>&lt;major>.&lt;minor>.&lt;point></code> version string will be chosen as a default.</p>
+<h4 id=androidnetworksecuritydomains>
+<code>androidNetworkSecurityDomains</code>
+<a class=anchor href=#androidnetworksecuritydomains>#</a>
+</h4>
+<p>A list of network domain names that your application should be allowed to communicate with.
+This maps to the concept of <a href=https://developer.android.com/training/articles/security-config#domain-config>domains in the Android network security configuration</a>.
+If you do not specify any domains here, your project will not be able to communicate with any websites.</p>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#assumptions>Assumptions</a></li>
+<li><a href=#configuration-file>Configuration File</a>
+<ul>
+<li><a href=#properties>Properties</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

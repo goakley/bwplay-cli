@@ -1,0 +1,142 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Code Generator #  bwplay-cli can generate bits of code to ease the development process.
+Audio #  If your project has audio assets (specified by the audioFiles setting), bwplay-cli can generate code that exports an Audio object, which exposes all your audio assets as strictly-typed HTMLAudioElements.
+bwplay-cli generate-audio [--stdout] [--unpacked] Each audio element is named after its location in your project directory. Since assets are often stored in a common subdirectory, the common directory prefix is removed from the names of the members of the Audio object.">
+<meta name=theme-color content="#FFFFFF">
+<meta name=color-scheme content="light dark"><meta property="og:title" content="Code Generator">
+<meta property="og:description" content="Code Generator #  bwplay-cli can generate bits of code to ease the development process.
+Audio #  If your project has audio assets (specified by the audioFiles setting), bwplay-cli can generate code that exports an Audio object, which exposes all your audio assets as strictly-typed HTMLAudioElements.
+bwplay-cli generate-audio [--stdout] [--unpacked] Each audio element is named after its location in your project directory. Since assets are often stored in a common subdirectory, the common directory prefix is removed from the names of the members of the Audio object.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://goakley.github.io/bwplay-cli/docs/code-generator/"><meta property="article:section" content="docs">
+<title>Code Generator | bwplay-cli</title>
+<link rel=manifest href=/bwplay-cli/manifest.json>
+<link rel=icon href=/bwplay-cli/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/bwplay-cli/book.min.46181bc93375ba932026e753b37c40e6ff8bb16a9ef770c78bcc663e4577b1ba.css integrity="sha256-RhgbyTN1upMgJudTs3xA5v+LsWqe93DHi8xmPkV3sbo=" crossorigin=anonymous>
+<script defer src=/bwplay-cli/flexsearch.min.js></script>
+<script defer src=/bwplay-cli/en.search.min.e675bf9f26c0dc70dbe96877c929923a3b6b6560476adfff995c1889a1717fd9.js integrity="sha256-5nW/nybA3HDb6Wh3ySmSOjtrZWBHat//mVwYiaFxf9k=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a class="flex align-center" href=/bwplay-cli/><span>bwplay-cli</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/getting-started/>Getting Started</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/configuration/>Configuration</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/code-generator/ class=active>Code Generator</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/development-server/>Development Server</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/exporting/>Exporting</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/bwplay-cli/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Code Generator</strong>
+<label for=toc-control>
+<img src=/bwplay-cli/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#audio>Audio</a></li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=code-generator>
+Code Generator
+<a class=anchor href=#code-generator>#</a>
+</h1>
+<p><code>bwplay-cli</code> can generate bits of code to ease the development process.</p>
+<h2 id=audio>
+Audio
+<a class=anchor href=#audio>#</a>
+</h2>
+<p>If your project has audio assets (specified by the <a href=/bwplay-cli/docs/configuration/#audiofiles><code>audioFiles</code></a> setting), <code>bwplay-cli</code> can generate code that exports an <code>Audio</code> object, which exposes all your audio assets as strictly-typed <code>HTMLAudioElement</code>s.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>bwplay-cli generate-audio <span style=color:#f92672>[</span>--stdout<span style=color:#f92672>]</span> <span style=color:#f92672>[</span>--unpacked<span style=color:#f92672>]</span>
+</code></pre></div><p>Each audio element is named after its location in your project directory.
+Since assets are often stored in a common subdirectory, the common directory prefix is removed from the names of the members of the <code>Audio</code> object.</p>
+<p>For example, assuming the following directory structure:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>my-project/
+├─ bwplay.json
+├─ assets
+│  ├─ music
+│  │  ├─ song.wav
+│  ├─ sounds
+│  │  ├─ thud.wav
+</code></pre></div><p>And the following config setting:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#e6db74>&#34;audioFiles&#34;</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#34;assets/**/*.wav&#34;</span>],
+</code></pre></div><p>The generated <code>Audio</code> code would look something like:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Audio</span> <span style=color:#f92672>=</span> {
+  <span style=color:#a6e22e>music_song</span>: <span style=color:#66d9ef>HTMLAudioElement</span>,
+  <span style=color:#a6e22e>sounds_thud</span>: <span style=color:#66d9ef>HTMLAudioElement</span>,
+};
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>loadAudio</span> <span style=color:#f92672>=</span> ()<span style=color:#f92672>:</span> <span style=color:#a6e22e>Promise</span>&lt;<span style=color:#f92672>Audio</span>&gt; <span style=color:#f92672>=&gt;</span> { ... };
+</code></pre></div><p>To reference this generated code in your project, you could write something like:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Audio</span>, <span style=color:#a6e22e>loadAudio</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;audio&#39;</span>;
+<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>AUDIO</span>: <span style=color:#66d9ef>Audio</span> <span style=color:#f92672>|</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
+<span style=color:#a6e22e>loadAudio</span>().<span style=color:#a6e22e>then</span>(<span style=color:#a6e22e>v</span> <span style=color:#f92672>=&gt;</span> { <span style=color:#a6e22e>AUDIO</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>v</span>; }).<span style=color:#66d9ef>catch</span>(<span style=color:#a6e22e>e</span> <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>handleAudioError</span>);
+</code></pre></div><p>By default, generated audio code is written to the filesystem as specified by the <a href=/bwplay-cli/docs/configuration/#audiofiles><code>audioScriptFile</code></a> project setting.
+However, you can pass <code>--stdout</code> to instead print the generated code to your terminal.</p>
+<p>When the audio code is generated, the audio itself will be packed into the code as <a href=https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs>data urls</a>.
+This is meant to simplify the process of building and distributing your game.
+If you want to avoid this behaviour, you can pass the <code>--unpacked</code> flag to the command, which will cause the audio in the code to be referenced by its filesystem path (relative to the project root).</p>
+<blockquote class="book-hint danger">
+<p><strong>Unpacked audio code</strong></p>
+<p><code>bwplay-cli</code> will not re-generate the audio code when you <a href=/bwplay-cli/docs/exporting/>export your project</a>.
+If you use <code>--unpacked</code> and then export your project, the exported apps may not be able to load your audio.</p>
+</blockquote>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#audio>Audio</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

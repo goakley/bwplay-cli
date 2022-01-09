@@ -1,0 +1,124 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Getting Started #  You can quickly start working with bwplay-cli by installing the package from npm and creating a sample project config:
+npm i bwplay-cli npm exec -- bwplay-cli new Create a simple main.js file in the same directory:
+const canvas = document.createElement('canvas'); document.body.appendChild(canvas); const ctx = canvas.getContext('2d'); canvas.style.display = 'block'; canvas.style.margin = '0px'; canvas.style.padding = '0px'; canvas.style.width = '100%'; canvas.style.height = '100%'; const draw = () => { window.">
+<meta name=theme-color content="#FFFFFF">
+<meta name=color-scheme content="light dark"><meta property="og:title" content="Getting Started">
+<meta property="og:description" content="Getting Started #  You can quickly start working with bwplay-cli by installing the package from npm and creating a sample project config:
+npm i bwplay-cli npm exec -- bwplay-cli new Create a simple main.js file in the same directory:
+const canvas = document.createElement('canvas'); document.body.appendChild(canvas); const ctx = canvas.getContext('2d'); canvas.style.display = 'block'; canvas.style.margin = '0px'; canvas.style.padding = '0px'; canvas.style.width = '100%'; canvas.style.height = '100%'; const draw = () => { window.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://goakley.github.io/bwplay-cli/docs/getting-started/"><meta property="article:section" content="docs">
+<title>Getting Started | bwplay-cli</title>
+<link rel=manifest href=/bwplay-cli/manifest.json>
+<link rel=icon href=/bwplay-cli/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/bwplay-cli/book.min.46181bc93375ba932026e753b37c40e6ff8bb16a9ef770c78bcc663e4577b1ba.css integrity="sha256-RhgbyTN1upMgJudTs3xA5v+LsWqe93DHi8xmPkV3sbo=" crossorigin=anonymous>
+<script defer src=/bwplay-cli/flexsearch.min.js></script>
+<script defer src=/bwplay-cli/en.search.min.e675bf9f26c0dc70dbe96877c929923a3b6b6560476adfff995c1889a1717fd9.js integrity="sha256-5nW/nybA3HDb6Wh3ySmSOjtrZWBHat//mVwYiaFxf9k=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a class="flex align-center" href=/bwplay-cli/><span>bwplay-cli</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/getting-started/ class=active>Getting Started</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/configuration/>Configuration</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/code-generator/>Code Generator</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/development-server/>Development Server</a>
+</li>
+<li>
+<a href=https://goakley.github.io/bwplay-cli/docs/exporting/>Exporting</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/bwplay-cli/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Getting Started</strong>
+<label for=toc-control>
+<img src=/bwplay-cli/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents></nav>
+</aside>
+</header>
+<article class=markdown><h1 id=getting-started>
+Getting Started
+<a class=anchor href=#getting-started>#</a>
+</h1>
+<p>You can quickly start working with <code>bwplay-cli</code> by installing the package from <a href=https://www.npmjs.com/>npm</a> and creating a sample project config:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>npm i bwplay-cli
+npm exec -- bwplay-cli new
+</code></pre></div><p>Create a simple <code>main.js</code> file in the same directory:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>canvas</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>createElement</span>(<span style=color:#e6db74>&#39;canvas&#39;</span>);
+document.<span style=color:#a6e22e>body</span>.<span style=color:#a6e22e>appendChild</span>(<span style=color:#a6e22e>canvas</span>);
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>ctx</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>getContext</span>(<span style=color:#e6db74>&#39;2d&#39;</span>);
+<span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>display</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;block&#39;</span>;
+<span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>margin</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;0px&#39;</span>;
+<span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>padding</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;0px&#39;</span>;
+<span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>width</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;100%&#39;</span>;
+<span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>style</span>.<span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;100%&#39;</span>;
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>draw</span> <span style=color:#f92672>=</span> () =&gt; {
+  window.<span style=color:#a6e22e>requestAnimationFrame</span>(<span style=color:#a6e22e>draw</span>);
+  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>c</span> <span style=color:#f92672>=</span> Math.<span style=color:#a6e22e>round</span>(Math.<span style=color:#a6e22e>abs</span>(Math.<span style=color:#a6e22e>sin</span>(Date.<span style=color:#a6e22e>now</span>() <span style=color:#f92672>/</span> <span style=color:#ae81ff>1000</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>255</span>));
+  <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>fillStyle</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>`rgb(</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>c</span><span style=color:#e6db74>}</span><span style=color:#e6db74>,</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>c</span><span style=color:#e6db74>}</span><span style=color:#e6db74>,</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>c</span><span style=color:#e6db74>}</span><span style=color:#e6db74>)`</span>;
+  <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>fillRect</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span>, <span style=color:#a6e22e>ctx</span>.<span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>height</span>);
+};
+<span style=color:#a6e22e>draw</span>();
+</code></pre></div><blockquote class="book-hint warning">
+<p><strong>JavaScript vs TypeScript</strong></p>
+<p><code>bwplay-cli</code> expects projects to be written in TypeScript, but JavaScript will work for simple use cases (like this example).</p>
+</blockquote>
+<p>Run the development server to see your code in action:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>npm exec -- bwplay-cli serve
+</code></pre></div><p>You can export this project to get a self-contained version of your &ldquo;game&rdquo; as well:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>npm exec -- bwplay-cli export
+open ./export/web/index.html
+</code></pre></div><p>To learn more about how <code>bwplay-cli</code> works, and to take advantage of its more advanced functionality, check out the page on <a href=/bwplay-cli/docs/configuration/>configuring <code>bwplay-cli</code></a>.</p>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents></nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
