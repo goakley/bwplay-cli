@@ -274,23 +274,23 @@ function generateFileHTML(name: string, themeColor: string, javascripts: string[
     const icons = ICON_SIZES.flatMap(([val, vals]) => {
         const sizes = vals.map(v => `${v}x${v}`).join(' ');
         return [
-            `  <link rel="icon" type="image/png" sizes="${sizes}" href="icon.${val}.png">`,
-            `  <link rel="apple-touch-icon" type="image/png" sizes="${sizes}" href="icon.${val}.png">`,
+            `    <link rel="icon" type="image/png" sizes="${sizes}" href="icon.${val}.png">`,
+            `    <link rel="apple-touch-icon" type="image/png" sizes="${sizes}" href="icon.${val}.png">`,
         ];
     }).join('\n');
     return Promise.all(javascripts.map(jst => embed ? fs.readFile(jst).then(c => `    <script>${c}</script>`) : Promise.resolve(`    <script src="${jst}"></script>`))).then(jstags => {
         const jstag = jstags.join("\n");
         // TODO: meta color-scheme and media=prefers-color-scheme ? https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
         return `<!DOCTYPE html>
-<head>
-  <title>${name}</title>
-  <link rel="manifest" href="manifest.json">
+<html style="display:block;margin:0;padding:0;width:100%;height:100%;background-color:#000000;">
+  <head>
+    <title>${name}</title>
+    <link rel="manifest" href="manifest.json">
 ${icons}
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <meta content="utf-8" http-equiv="encoding">
-  <meta name="theme-color" content="${themeColor}">
-</head>
-<html lang="en" style="display:block;margin:0;padding:0;width:100%;height:100%;background-color:#000000;">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="theme-color" content="${themeColor}">
+  </head>
   <body style="display:block;margin:0;padding:0;width:100%;height:100%;background-color:#000000;">
 ${jstag}
   </body>
