@@ -60,7 +60,11 @@ A list of [glob](https://www.npmjs.com/package/glob) patterns used to find audio
 These files are used when [generating audio code]({{< relref "code-generator.md" >}}), running the [development server]({{< relref "development-server.md" >}}), and [exporting the final game]({{< relref "exporting.md" >}}).
 Files that aren't detected by any glob pattern will not make their way into the game.
 
-Currently, only [WAV](https://en.wikipedia.org/wiki/WAV) files are fully supported; use other audio formats at your own risk.
+A [large number of file types](https://www.npmjs.com/package/file-type) are supported.
+`bwplay-cli` does not care about the particular type of file you are trying to use - it will happily treat a PNG file as audio if the glob picks one up.
+If you're targeting multiple platforms (e.g. most web browsers), consider using a [popular/common audio format](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_codecs) for your audio files.
+
+If the tooling cannot figure out the type of one or more of your files, a warning message will be generated when attempting to generate audio code, and those unidentifiable files will not be included in the generated code.
 
 If this setting is not specified, no audio code will be generated.
 

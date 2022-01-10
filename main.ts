@@ -5,6 +5,7 @@ import * as http from 'http';
 import * as path from 'path';
 import * as yargs from 'yargs';
 import * as glob from 'glob';
+import * as fileType from 'file-type';
 
 // The icons to generate
 const ICON_SIZES: [number, number[]][] = [[64, [32, 48, 64]], [128, [72, 96, 128]], [192, [144, 168, 192]], [256, [256]], [512, [512]]];
@@ -25,6 +26,11 @@ function commonArrayPrefix<T>(values: T[][]): T[] {
         }
         return acc;
     }) : [];
+}
+
+async function bufferToDataURL(buffer: Buffer): Promise<string | undefined> {
+    const value = await fileType.fromBuffer(buffer);
+    return value === undefined ? undefined : `data:${value.mime};base64,${buffer.toString('base64')}`;
 }
 
 async function applyGlobs(globs: string[]): Promise<string[]> {
@@ -314,24 +320,26 @@ function imagemagickResize(input: string, output: string, size: number): Promise
 
 function generateAudio(audioFiles: string[], pack: boolean): Promise<string> {
     const prelen = commonArrayPrefix(audioFiles.map(filename => path.parse(filename).dir.split(path.sep).filter(x => x))).length;
-    const items: [string, string][] = audioFiles.map(filename => {
+    return Promise.all(audioFiles.map(async filename => {
         const pathdata = path.parse(filename);
         const elements = pathdata.dir.split(path.sep).filter(x => x).slice(prelen);
         elements.push(pathdata.name);
         const item = elements.join('_');
-        return [filename, item];
-    });
-    const decls = items.map(([_, item]) => `${item}: HTMLAudioElement`);
-    const defs = items.map(([_, item]) => `${item}: new Audio()`);
-    const loads = items.map(([_, item]) => `        result.${item}.addEventListener('canplaythrough', next);`);
-    const aborts = items.map(([_, item]) => `        result.${item}.addEventListener('abort', reject);`);
-    const errors = items.map(([_, item]) => `        result.${item}.addEventListener('error', reject);`);
-    return Promise.all(items.map(async ([filename, item]) => {
-        const pathdata = path.parse(filename);
-        const dataPromise = pack ? fs.readFile(filename).then(b => `data:audio/wav;base64,${b.toString('base64')}`) : new Promise((res, _) => res(filename));
-        const data = await dataPromise;
-        return `        result.${item}.src = '${data}';`;
-    })).then(srcs => {
+        const source = await (pack ? fs.readFile(filename).then(bufferToDataURL) : Promise.resolve(filename));
+        if (source === undefined) {
+            console.log(`Could not identify type of file: ${filename}`);
+            return undefined;
+        }
+        const result: [string, string] = [source, item];
+        return result;
+    })).then(allItems => {
+        const items = allItems.filter(v => v !== undefined).map(v => v as [string, string]);
+        const decls = items.map(([_, item]) => `${item}: HTMLAudioElement`);
+        const defs = items.map(([_, item]) => `${item}: new Audio()`);
+        const loads = items.map(([_, item]) => `        result.${item}.addEventListener('canplaythrough', next);`);
+        const aborts = items.map(([_, item]) => `        result.${item}.addEventListener('abort', reject);`);
+        const errors = items.map(([_, item]) => `        result.${item}.addEventListener('error', reject);`);
+        const srcs = items.map(([source, item]) => `        result.${item}.src = '${source}'`);
         return `export type Audio = { ${decls.join(', ')} };
 export const loadAudio = (): Promise<Audio> => {
     return new Promise((resolve, reject) => {
