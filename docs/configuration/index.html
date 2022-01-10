@@ -17,7 +17,7 @@ Your code takes care of building its own DOM. All generated HTML assumes that yo
 <link rel=icon href=/bwplay-cli/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/bwplay-cli/book.min.46181bc93375ba932026e753b37c40e6ff8bb16a9ef770c78bcc663e4577b1ba.css integrity="sha256-RhgbyTN1upMgJudTs3xA5v+LsWqe93DHi8xmPkV3sbo=" crossorigin=anonymous>
 <script defer src=/bwplay-cli/flexsearch.min.js></script>
-<script defer src=/bwplay-cli/en.search.min.e675bf9f26c0dc70dbe96877c929923a3b6b6560476adfff995c1889a1717fd9.js integrity="sha256-5nW/nybA3HDb6Wh3ySmSOjtrZWBHat//mVwYiaFxf9k=" crossorigin=anonymous></script>
+<script defer src=/bwplay-cli/en.search.min.fcacf1f724df33df41b33f5dc5e9fdd97242668efcd9b1329287bc9d4118a486.js integrity="sha256-/Kzx9yTfM99Bsz9dxen92XJCZo782bEykoe8nUEYpIY=" crossorigin=anonymous></script>
 </head>
 <body dir=ltr>
 <input type=checkbox class="hidden toggle" id=menu-control>
@@ -138,7 +138,10 @@ TypeScript files should be rendered by your own build process, and the output fi
 <p>A list of <a href=https://www.npmjs.com/package/glob>glob</a> patterns used to find audio files that should be included in the project.
 These files are used when <a href=/bwplay-cli/docs/code-generator/>generating audio code</a>, running the <a href=/bwplay-cli/docs/development-server/>development server</a>, and <a href=/bwplay-cli/docs/exporting/>exporting the final game</a>.
 Files that aren&rsquo;t detected by any glob pattern will not make their way into the game.</p>
-<p>Currently, only <a href=https://en.wikipedia.org/wiki/WAV>WAV</a> files are fully supported; use other audio formats at your own risk.</p>
+<p>A <a href=https://www.npmjs.com/package/file-type>large number of file types</a> are supported.
+<code>bwplay-cli</code> does not care about the particular type of file you are trying to use - it will happily treat a PNG file as audio if the glob picks one up.
+If you&rsquo;re targeting multiple platforms (e.g. most web browsers), consider using a <a href=https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Audio_codecs>popular/common audio format</a> for your audio files.</p>
+<p>If the tooling cannot figure out the type of one or more of your files, a warning message will be generated when attempting to generate audio code, and those unidentifiable files will not be included in the generated code.</p>
 <p>If this setting is not specified, no audio code will be generated.</p>
 <h4 id=audioscriptfile>
 <code>audioScriptFile</code>
